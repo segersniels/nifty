@@ -17,9 +17,19 @@
     lg:grid-cols-3;
 }
 
+.top {
+  @apply flex
+    my-4;
+}
+
 .title {
-  @apply text-6xl
+  @apply flex-1
+    text-6xl
     font-bold
-    tracking-tighter
-    mb-4;
+    tracking-tighter;
+}
+
+.search {
+  @apply w-96
+    self-center;
 }

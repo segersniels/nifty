@@ -15,23 +15,6 @@
     bg-gray-50;
 }
 
-.input {
-  @apply bg-gray-100
-    rounded-lg
-    text-gray-500
-    px-2
-    flex-1;
-}
-
-.button {
-  @apply font-semibold
-    ml-2
-    bg-gray-200
-    p-2
-    rounded-lg
-    hover:bg-gray-300;
-}
-
 .title {
   @apply text-6xl
     font-bold
@@ -44,9 +27,4 @@
     bg-clip-text;
 
   -webkit-text-fill-color: transparent;
-}
-
-.search {
-  @apply flex
-    w-full;
 }
