@@ -16,6 +16,7 @@ interface Collection {
     average_price: number;
     one_day_average_price: number;
     one_day_sales: number;
+    seven_day_average_price: number;
   };
 }
 
@@ -63,9 +64,18 @@ const Item = (props: Props) => {
 
         {!!data?.collection.stats.one_day_average_price && (
           <tr>
-            <td className={styles.description}>One Day Average Price</td>
+            <td className={styles.description}>1d Average Price</td>
             <td className={styles.value}>
               Ξ{data.collection.stats.one_day_average_price.toFixed(3)}
+            </td>
+          </tr>
+        )}
+
+        {!!data?.collection.stats.seven_day_average_price && (
+          <tr>
+            <td className={styles.description}>7d Average Price</td>
+            <td className={styles.value}>
+              Ξ{data.collection.stats.seven_day_average_price.toFixed(3)}
             </td>
           </tr>
         )}
