@@ -38,7 +38,9 @@ const Item = (props: Props) => {
   return (
     <a href={asset.permalink} className={styles.item}>
       {!!data?.collection && (
-        <p className={styles.price}>Ξ{data.collection.stats.floor_price}</p>
+        <p className={styles.price}>
+          Ξ{data.collection.stats.floor_price ?? 0}
+        </p>
       )}
 
       <p className={styles.name}>{asset.name}</p>
