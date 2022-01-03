@@ -21,6 +21,5 @@
   @apply text-6xl
     font-bold
     tracking-tighter
-    mx-auto
     mb-4;
 }
