@@ -18,15 +18,13 @@ const Assets = () => {
     `https://api.opensea.io/api/v1/assets?order_direction=asc&owner=${address}`,
   );
 
+  const user =
+    data?.assets[0].owner.user?.username ??
+    (address as string)?.slice(2, 8).toUpperCase();
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>
-        {data?.assets[0].owner.user.username ? (
-          `${data.assets[0].owner.user.username}'s Assets`
-        ) : (
-          <Skeleton />
-        )}
-      </h1>
+      <h1 className={styles.title}>{`${user ?? <Skeleton />}'s Assets`}</h1>
 
       <div className={styles.wrapper}>
         {!!data?.assets.length &&
