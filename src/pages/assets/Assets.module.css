@@ -2,17 +2,23 @@
   @apply self-center
     justify-self-center
     mx-auto
-    rounded-2xl
-    shadow-2xl
     bg-gray-50
-    p-10;
+    p-10
+    h-full
+    lg:rounded-2xl
+    lg:shadow-2xl
+    lg:h-auto;
 }
 
 .wrapper {
   @apply grid
     grid-cols-1
+    h-full
+    w-max
+    mx-auto
     md:grid-cols-3
-    lg:grid-cols-3;
+    lg:grid-cols-3
+    lg:h-auto;
 }
 
 .title {
