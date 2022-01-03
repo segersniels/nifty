@@ -22,7 +22,6 @@ html,
 body,
 [id='__next'] {
   @apply flex
-    h-full
     w-full
     antialiased
     bg-white
