@@ -24,11 +24,16 @@ const Assets = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{`${user ?? <Skeleton />}'s Assets`}</h1>
+      <h1 className={styles.title}>
+        {user ? `${user}'s Assets` : <Skeleton width="30rem" />}
+      </h1>
 
       <div className={styles.wrapper}>
-        {!!data?.assets.length &&
-          data.assets.map((asset) => <Item key={asset.id} asset={asset} />)}
+        {data?.assets.length
+          ? data.assets.map((asset) => <Item key={asset.id} asset={asset} />)
+          : Array.from({ length: 3 }, (_, i) => i + 1).map((index) => (
+              <Item key={index} loading />
+            ))}
       </div>
     </div>
   );
