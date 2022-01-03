@@ -1,0 +1,51 @@
+.item {
+  @apply flex
+    flex-col
+    w-80
+    m-2
+    p-3
+    items-center
+    bg-gray-100
+    rounded-2xl
+    shadow-md;
+}
+
+.image {
+  @apply my-2
+    w-full
+    rounded-2xl;
+}
+
+.table {
+  @apply w-72;
+}
+
+.description {
+  @apply float-left;
+}
+
+.value {
+  @apply float-right
+    font-semibold;
+}
+
+.top {
+  @apply flex
+    w-full
+    justify-between
+    items-center;
+}
+
+.name {
+  @apply leading-none
+    text-lg
+    font-semibold
+    self-start;
+}
+
+.price {
+  @apply font-bold
+    tracking-tighter
+    text-2xl
+    self-start;
+}
