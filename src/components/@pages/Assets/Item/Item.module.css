@@ -49,3 +49,8 @@
     text-2xl
     self-start;
 }
+
+.row {
+  @apply border-b-[1px]
+    border-gray-200;
+}
