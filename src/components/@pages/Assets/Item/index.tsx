@@ -13,6 +13,9 @@ interface Props {
 interface Collection {
   stats: {
     floor_price: number;
+    average_price: number;
+    one_day_average_price: number;
+    one_day_sales: number;
   };
 }
 
@@ -40,15 +43,41 @@ const Item = (props: Props) => {
       )}
 
       <table className={styles.table}>
-        <tr>
-          <td className={styles.description}>Last Sale Price</td>
-          <td className={styles.value}>
-            Ξ
-            {asset.last_sale
-              ? asset.last_sale.total_price / 1000000000000000000
-              : 0}
-          </td>
-        </tr>
+        {asset.last_sale?.total_price && (
+          <tr>
+            <td className={styles.description}>Last Sale Price</td>
+            <td className={styles.value}>
+              Ξ{asset.last_sale.total_price / 1000000000000000000}
+            </td>
+          </tr>
+        )}
+
+        {data.collection.stats.average_price && (
+          <tr>
+            <td className={styles.description}>Average Price</td>
+            <td className={styles.value}>
+              Ξ{data.collection.stats.average_price}
+            </td>
+          </tr>
+        )}
+
+        {data.collection.stats.one_day_average_price && (
+          <tr>
+            <td className={styles.description}>One Day Average Price</td>
+            <td className={styles.value}>
+              Ξ{data.collection.stats.one_day_average_price}
+            </td>
+          </tr>
+        )}
+
+        {data.collection.stats.one_day_sales && (
+          <tr>
+            <td className={styles.description}>Sales (24h)</td>
+            <td className={styles.value}>
+              {data.collection.stats.one_day_sales}
+            </td>
+          </tr>
+        )}
       </table>
     </a>
   );
