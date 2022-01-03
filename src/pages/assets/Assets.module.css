@@ -1,25 +1,20 @@
 .container {
-  @apply self-center
-    justify-self-center
+  @apply flex
+    flex-col
     mx-auto
-    bg-gray-50
-    my-10
-    p-10
-    h-full
+    py-10
+    lg:bg-gray-50
+    lg:p-10
+    lg:my-10
     lg:rounded-2xl
-    lg:shadow-2xl
-    lg:h-auto;
+    lg:shadow-2xl;
 }
 
 .wrapper {
   @apply grid
     grid-cols-1
-    h-full
-    w-max
     mx-auto
-    md:grid-cols-3
-    lg:grid-cols-3
-    lg:h-auto;
+    lg:grid-cols-3;
 }
 
 .title {

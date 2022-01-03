@@ -12,12 +12,6 @@ select {
   }
 }
 
-img,
-video {
-  @apply max-w-min
-    inline-block;
-}
-
 html,
 body,
 [id='__next'] {
@@ -26,6 +20,8 @@ body,
     antialiased
     bg-white
     text-black;
+
+  height: max-content;
 }
 
 * {
@@ -40,10 +36,4 @@ body,
     sans-serif !important;
   font-display: swap;
   text-rendering: optimizeLegibility;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }

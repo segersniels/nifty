@@ -1,8 +1,8 @@
 .container {
   @apply flex
-    flex-col
-    flex-1
-    justify-center;
+    items-center
+    mx-auto
+    h-screen;
 }
 
 .wrapper {
@@ -16,8 +16,7 @@
 }
 
 .input {
-  @apply font-semibold
-    bg-gray-100
+  @apply bg-gray-100
     rounded-lg
     text-gray-500
     px-2
