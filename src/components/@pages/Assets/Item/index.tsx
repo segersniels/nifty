@@ -36,7 +36,12 @@ const Item = (props: Props) => {
   }
 
   return (
-    <a href={asset.permalink} className={styles.item}>
+    <a
+      href={asset.permalink}
+      className={styles.item}
+      target="_blank"
+      rel="noreferrer"
+    >
       {!!data?.collection && (
         <p className={styles.price}>
           Ξ{data.collection.stats.floor_price ?? 0}
