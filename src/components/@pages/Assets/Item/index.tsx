@@ -52,25 +52,25 @@ const Item = (props: Props) => {
           </tr>
         )}
 
-        {data.collection.stats.average_price && (
+        {!!data?.collection.stats.average_price && (
           <tr>
             <td className={styles.description}>Average Price</td>
             <td className={styles.value}>
-              Ξ{data.collection.stats.average_price}
+              Ξ{data.collection.stats.average_price.toFixed(3)}
             </td>
           </tr>
         )}
 
-        {data.collection.stats.one_day_average_price && (
+        {!!data?.collection.stats.one_day_average_price && (
           <tr>
             <td className={styles.description}>One Day Average Price</td>
             <td className={styles.value}>
-              Ξ{data.collection.stats.one_day_average_price}
+              Ξ{data.collection.stats.one_day_average_price.toFixed(3)}
             </td>
           </tr>
         )}
 
-        {data.collection.stats.one_day_sales && (
+        {!!data?.collection.stats.one_day_sales && (
           <tr>
             <td className={styles.description}>Sales (24h)</td>
             <td className={styles.value}>
