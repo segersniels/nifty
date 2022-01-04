@@ -69,7 +69,8 @@ const Item = (props: Props) => {
             <tr className={styles.row}>
               <td className={styles.description}>Last Sale Price</td>
               <td className={styles.value}>
-                Ξ{asset.last_sale.total_price / 1000000000000000000}
+                Ξ
+                {(asset.last_sale.total_price / 1000000000000000000).toFixed(3)}
               </td>
             </tr>
           )}
