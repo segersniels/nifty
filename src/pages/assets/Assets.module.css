@@ -19,7 +19,9 @@
 
 .top {
   @apply flex
-    my-4;
+    flex-col
+    m-4
+    lg:flex-row;
 }
 
 .title {
@@ -31,5 +33,7 @@
 
 .search {
   @apply w-96
-    self-center;
+    self-center
+    mt-4
+    lg:mt-4;
 }
