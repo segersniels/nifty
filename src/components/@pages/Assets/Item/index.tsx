@@ -78,7 +78,7 @@ const Item = (props: Props) => {
           <tr className={styles.row}>
             <td className={styles.description}>Average Price</td>
             <td className={styles.value}>
-              Ξ{data.collection.stats.average_price.toFixed(3)}
+              Ξ{data?.collection.stats.average_price.toFixed(3) ?? 0}
             </td>
           </tr>
 
