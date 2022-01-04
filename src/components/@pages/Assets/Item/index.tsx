@@ -42,7 +42,7 @@ const Item = (props: Props) => {
     return name;
   }, [asset?.collection.name, asset?.token_id, asset?.name]);
 
-  if (loading || isValidating) {
+  if (loading || (isValidating && !data)) {
     return <Loading />;
   }
 
