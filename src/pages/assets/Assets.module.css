@@ -28,7 +28,9 @@
   @apply flex-1
     text-6xl
     font-bold
-    tracking-tighter;
+    tracking-tighter
+    text-center
+    lg:text-left;
 }
 
 .search {
