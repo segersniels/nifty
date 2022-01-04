@@ -34,8 +34,9 @@
 }
 
 .search {
-  @apply w-96
+  @apply w-80
     self-center
     mt-4
+    lg:w-96
     lg:mt-4;
 }
