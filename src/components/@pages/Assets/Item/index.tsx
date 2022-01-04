@@ -53,11 +53,9 @@ const Item = (props: Props) => {
       target="_blank"
       rel="noreferrer"
     >
-      {!!data?.collection && (
-        <p className={styles.price}>
-          Ξ{data.collection.stats.floor_price ?? 0}
-        </p>
-      )}
+      <p className={styles.price}>
+        Ξ{data?.collection?.stats.floor_price ?? 0}
+      </p>
 
       <p className={styles.name}>{constructName()}</p>
 
