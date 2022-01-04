@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import useRequest from 'hooks/useRequest';
-import React from 'react';
+import React, { useCallback } from 'react';
 import Asset from 'types/Asset';
 
 import styles from './Item.module.css';
@@ -31,6 +31,17 @@ const Item = (props: Props) => {
     },
   );
 
+  const constructName = useCallback(() => {
+    let name = asset.name;
+    const fallbackName = `${asset.collection.name} #${asset.token_id}`;
+
+    if (!name || name.startsWith('#')) {
+      name = fallbackName;
+    }
+
+    return name;
+  }, [asset?.collection.name, asset?.token_id, asset?.name]);
+
   if (loading || isValidating) {
     return <Loading />;
   }
@@ -48,7 +59,7 @@ const Item = (props: Props) => {
         </p>
       )}
 
-      <p className={styles.name}>{asset.name}</p>
+      <p className={styles.name}>{constructName()}</p>
 
       <img className={styles.image} src={asset.image_url} />
 

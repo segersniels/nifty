@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 interface Asset {
   id: number;
+  token_id: string;
   name: string;
   image_url: string;
   permalink: string;
@@ -11,6 +12,7 @@ interface Asset {
   };
   collection: {
     slug: string;
+    name: string;
   };
   last_sale?: {
     total_price: number;
