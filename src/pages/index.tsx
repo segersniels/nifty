@@ -32,10 +32,11 @@ const Landing = () => {
         <div className={styles.actions}>
           <Search />
 
-          <p className={styles.divider}>or</p>
-
           {!!(window as any).ethereum && (
-            <Button onClick={loginWithMetamask}>Metamask</Button>
+            <>
+              <p className={styles.divider}>or</p>
+              <Button onClick={loginWithMetamask}>Metamask</Button>
+            </>
           )}
         </div>
       </div>
