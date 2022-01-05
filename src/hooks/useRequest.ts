@@ -2,6 +2,7 @@ import useSWR from 'swr';
 
 interface Options {
   shouldFetch?: boolean;
+  refreshInterval?: number;
 }
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -12,7 +13,9 @@ const useRequest = <T extends unknown>(
     shouldFetch: true,
   },
 ) => {
-  const response = useSWR<T>(options.shouldFetch ? url : null, fetcher);
+  const response = useSWR<T>(options.shouldFetch ? url : null, fetcher, {
+    refreshInterval: options.refreshInterval,
+  });
 
   return response;
 };
