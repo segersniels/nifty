@@ -28,7 +28,7 @@ const Item = (props: Props) => {
     `https://api.opensea.io/api/v1/collection/${asset?.collection.slug}`,
     {
       shouldFetch: !loading,
-      refreshInterval: 10000,
+      refreshInterval: 30000,
     },
   );
 
