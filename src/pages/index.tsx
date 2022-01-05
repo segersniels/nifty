@@ -20,7 +20,7 @@ const Landing = () => {
         },
       });
     } catch (error) {
-      return alert('Please Install Metamask Wallet');
+      return alert('Unable to authenticate with Metamask Wallet');
     }
   }, [router]);
 

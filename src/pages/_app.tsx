@@ -2,10 +2,10 @@ import 'styles/global.css';
 import 'styles/core.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import React from 'react';
+import dynamic from 'next/dynamic';
 
-const App = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
-};
+const App = dynamic(() => import('@pages/App'), {
+  ssr: false,
+});
 
 export default App;
