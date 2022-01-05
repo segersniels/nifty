@@ -11,6 +11,7 @@ const useRequest = <T extends unknown>(
   url: string,
   options: Options = {
     shouldFetch: true,
+    refreshInterval: 0,
   },
 ) => {
   const response = useSWR<T>(options.shouldFetch ? url : null, fetcher, {
