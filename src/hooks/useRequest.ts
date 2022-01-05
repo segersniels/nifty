@@ -1,20 +1,17 @@
 import useSWR from 'swr';
-
-interface Options {
-  shouldFetch?: boolean;
-  refreshInterval?: number;
-}
+import { PublicConfiguration } from 'swr/dist/types';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const useRequest = <T extends unknown>(
   url: string,
-  options: Options = {
-    shouldFetch: true,
-    refreshInterval: 0,
+  options: Partial<PublicConfiguration> & {
+    shouldFetch?: boolean;
   },
 ) => {
-  const response = useSWR<T>(options.shouldFetch ? url : null, fetcher, {
+  const { shouldFetch = true } = options;
+
+  const response = useSWR<T>(shouldFetch ? url : null, fetcher, {
     refreshInterval: options.refreshInterval,
   });
 
