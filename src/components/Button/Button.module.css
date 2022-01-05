@@ -6,5 +6,6 @@
     whitespace-nowrap
     hover:bg-gray-300
     disabled:bg-gray-100
-    disabled:text-gray-400;
+    disabled:text-gray-400
+    disabled:cursor-default;
 }
