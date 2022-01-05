@@ -35,5 +35,6 @@
 }
 
 .divider {
-  @apply font-light;
+  @apply font-light
+    mx-2;
 }
