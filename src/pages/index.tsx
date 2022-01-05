@@ -14,11 +14,7 @@ const Landing = () => {
         'eth_requestAccounts',
       );
 
-      router.push(`/assets`, {
-        query: {
-          address: accounts.result[0],
-        },
-      });
+      router.push(`/assets?address=${accounts.result[0]}`);
     } catch (error) {
       return alert('Unable to authenticate with Metamask Wallet');
     }
