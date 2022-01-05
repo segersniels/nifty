@@ -6,15 +6,6 @@
     flex-1;
 }
 
-.button {
-  @apply font-semibold
-    ml-2
-    bg-gray-200
-    p-2
-    rounded-lg
-    hover:bg-gray-300;
-}
-
 .search {
   @apply flex
     w-full;

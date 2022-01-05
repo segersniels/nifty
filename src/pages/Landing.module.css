@@ -28,3 +28,12 @@
 
   -webkit-text-fill-color: transparent;
 }
+
+.actions {
+  @apply flex
+    items-center;
+}
+
+.divider {
+  @apply font-light;
+}

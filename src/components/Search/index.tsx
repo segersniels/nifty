@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import Button from 'components/Button';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
@@ -19,16 +20,18 @@ const Search = (props: Props) => {
     <div className={cx(styles.search, props.className)}>
       <input
         onChange={(e) => setAddress(e.target.value)}
-        placeholder="address"
+        placeholder="Wallet Address"
         className={styles.input}
         value={address}
       />
-      <button
+
+      <Button
         className={styles.button}
         onClick={() => router.push(`/assets?address=${address}`)}
+        disabled={!address}
       >
         Show
-      </button>
+      </Button>
     </div>
   );
 };
