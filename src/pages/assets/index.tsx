@@ -13,7 +13,7 @@ const Assets = () => {
   const address = (router.query.address ??
     router.asPath.match(new RegExp(`[&?]address=(.*)(&|$)`))?.[1]) as string;
 
-  const { data, error, isValidating } = useRequest<{ assets: Asset[] }>(
+  const { data, error } = useRequest<{ assets: Asset[] }>(
     `https://api.opensea.io/api/v1/assets?order_direction=asc&limit=50&owner=${address}`,
     {
       refreshInterval: 60000,
@@ -28,7 +28,7 @@ const Assets = () => {
       </div>
 
       <div className={styles.wrapper}>
-        {data?.assets?.length && !error && !isValidating
+        {data?.assets?.length && !error
           ? data.assets.map((asset) => <Item key={asset.id} asset={asset} />)
           : Array.from({ length: 3 }, (_, i) => i + 1).map((index) => (
               <Item key={index} loading />
