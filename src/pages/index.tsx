@@ -1,4 +1,5 @@
 import Button from 'components/Button';
+import Layout from 'components/Layout';
 import Search from 'components/Search';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
@@ -21,22 +22,24 @@ const Landing = () => {
   }, [router]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <h1 className={styles.title}>Nifty NFT Explorer</h1>
+    <Layout>
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <h1 className={styles.title}>Nifty NFT Explorer</h1>
 
-        <div className={styles.actions}>
-          <Search />
+          <div className={styles.actions}>
+            <Search />
 
-          {!!(window as any).ethereum && (
-            <>
-              <p className={styles.divider}>or</p>
-              <Button onClick={loginWithMetamask}>Metamask</Button>
-            </>
-          )}
+            {!!(window as any).ethereum && (
+              <>
+                <p className={styles.divider}>or</p>
+                <Button onClick={loginWithMetamask}>Metamask</Button>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

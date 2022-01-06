@@ -1,0 +1,25 @@
+.container {
+  @apply flex
+    flex-col
+    min-h-screen;
+}
+
+.wrapper {
+  @apply flex
+    flex-1;
+}
+
+.footer {
+  @apply flex
+    flex-none
+    flex-col
+    items-center
+    font-light
+    text-gray-300
+    text-xs
+    py-1
+    md:text-sm
+    md:fixed
+    md:bottom-1
+    md:right-2;
+}

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import Item from 'components/@pages/Assets/Item';
+import Layout from 'components/Layout';
 import Search from 'components/Search';
 import useRequest from 'hooks/useRequest';
 import { useRouter } from 'next/router';
@@ -21,20 +22,22 @@ const Assets = () => {
   );
 
   return (
-    <div className={styles.container}>
-      <div className={styles.top}>
-        <h1 className={styles.title}>Assets</h1>
-        <Search className={styles.search} placeholder={address} />
-      </div>
+    <Layout>
+      <div className={styles.container}>
+        <div className={styles.top}>
+          <h1 className={styles.title}>Assets</h1>
+          <Search className={styles.search} placeholder={address} />
+        </div>
 
-      <div className={styles.wrapper}>
-        {data?.assets?.length && !error
-          ? data.assets.map((asset) => <Item key={asset.id} asset={asset} />)
-          : Array.from({ length: 3 }, (_, i) => i + 1).map((index) => (
-              <Item key={index} loading />
-            ))}
+        <div className={styles.wrapper}>
+          {data?.assets?.length && !error
+            ? data.assets.map((asset) => <Item key={asset.id} asset={asset} />)
+            : Array.from({ length: 3 }, (_, i) => i + 1).map((index) => (
+                <Item key={index} loading />
+              ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
