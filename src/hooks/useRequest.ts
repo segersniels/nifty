@@ -13,6 +13,7 @@ const useRequest = <T extends unknown>(
 
   const response = useSWR<T>(shouldFetch ? url : null, fetcher, {
     refreshInterval: options.refreshInterval,
+    onSuccess: options.onSuccess,
   });
 
   return response;

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 interface Collection {
+  name: string;
+  slug: string;
   payment_tokens: {
     usd_price: number;
   }[];
