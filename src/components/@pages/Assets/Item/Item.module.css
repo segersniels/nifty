@@ -53,5 +53,6 @@
 
 .row {
   @apply border-b-[1px]
-    border-gray-200;
+    border-neutral-300
+    border-dotted;
 }
