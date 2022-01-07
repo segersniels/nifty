@@ -5,6 +5,7 @@ import Search from 'components/Search';
 import useRequest from 'hooks/useRequest';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import Asset from 'types/Asset';
 import Collection from 'types/Collection';
 
@@ -79,7 +80,9 @@ const Assets = () => {
     <Layout>
       <div className={styles.container}>
         <div className={styles.top}>
-          <h1 className={styles.title}>${worth.toFixed(2)}</h1>
+          <h1 className={styles.title}>
+            {worth ? `$${worth.toFixed(2)}` : <Skeleton width="15rem" />}
+          </h1>
           <Search className={styles.search} placeholder={address} />
         </div>
 
