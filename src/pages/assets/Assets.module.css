@@ -24,7 +24,7 @@
     lg:flex-row;
 }
 
-.title {
+.worth {
   @apply flex-1
     text-5xl
     font-bold

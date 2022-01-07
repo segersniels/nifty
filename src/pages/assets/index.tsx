@@ -80,7 +80,7 @@ const Assets = () => {
     <Layout>
       <div className={styles.container}>
         <div className={styles.top}>
-          <h1 className={styles.title}>
+          <h1 className={styles.worth}>
             {worth ? `$${worth.toFixed(2)}` : <Skeleton width="15rem" />}
           </h1>
           <Search className={styles.search} placeholder={address} />
