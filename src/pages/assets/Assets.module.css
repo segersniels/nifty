@@ -35,8 +35,9 @@
 
 .search {
   @apply w-80
-    self-center
+    h-10
     mt-4
-    lg:w-96
-    lg:mt-4;
+    self-end
+    md:mt-0
+    md:w-96;
 }
