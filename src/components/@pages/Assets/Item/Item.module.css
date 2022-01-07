@@ -15,7 +15,7 @@
 }
 
 .wrapper {
-  @apply bg-slate-50
+  @apply bg-white
     rounded-2xl;
 }
 
