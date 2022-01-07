@@ -2,6 +2,7 @@
 import useRequest from 'hooks/useRequest';
 import React, { useCallback } from 'react';
 import Asset from 'types/Asset';
+import Collection from 'types/Collection';
 
 import styles from './Item.module.css';
 import Loading from './Loading';
@@ -9,16 +10,6 @@ import Loading from './Loading';
 interface Props {
   asset?: Asset;
   loading?: boolean;
-}
-
-interface Collection {
-  stats: {
-    floor_price: number;
-    average_price: number;
-    one_day_average_price: number;
-    one_day_sales: number;
-    seven_day_average_price: number;
-  };
 }
 
 const Item = (props: Props) => {
