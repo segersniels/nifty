@@ -5,16 +5,18 @@ import styles from '../Item.module.css';
 
 const Loading = () => {
   return (
-    <div className={styles.item}>
-      <p className={styles.price}>
-        <Skeleton width="5rem" />
-      </p>
+    <div className={styles.container}>
+      <Skeleton className={styles.image} height="20rem" borderRadius={0} />
 
-      <p className={styles.name}>
-        <Skeleton width="15rem" />
-      </p>
+      <div className={styles.top}>
+        <p className={styles.price}>
+          <Skeleton width="5rem" />
+        </p>
 
-      <Skeleton className={styles.image} width="18.5rem" height="18.5rem" />
+        <p className={styles.name}>
+          <Skeleton width="15rem" />
+        </p>
+      </div>
 
       <table className={styles.table}>
         <tbody>

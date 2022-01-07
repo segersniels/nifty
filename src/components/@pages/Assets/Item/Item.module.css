@@ -1,22 +1,15 @@
-.item {
-  @apply flex
-    flex-col
+.container {
+  @apply bg-white
     w-80
     m-2
-    bg-neutral-200
-    bg-opacity-50
     rounded-2xl
     shadow-md
     overflow-hidden;
 }
 
 .image {
-  @apply rounded-t-2xl;
-}
-
-.wrapper {
-  @apply bg-white
-    rounded-2xl;
+  @apply rounded-t-2xl
+    leading-loose;
 }
 
 .table {
