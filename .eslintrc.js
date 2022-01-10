@@ -25,7 +25,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'error',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
-    "react/prop-types": 0,
+    'react/prop-types': 0,
     '@typescript-eslint/naming-convention': [
       'error',
       {
