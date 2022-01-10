@@ -1,7 +1,8 @@
 import cx from 'classnames';
 import Button from 'components/Button';
+import * as gtag from 'lib/gtag';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useState } from 'react';
 
 import styles from './Search.module.css';
@@ -16,6 +17,16 @@ const Search = (props: Props) => {
   const [address, setAddress] = useState<string | undefined>(placeholder);
   const router = useRouter();
 
+  const handleSearch = useCallback(() => {
+    gtag.event({
+      action: 'search_input',
+      category: 'address',
+      label: address,
+    });
+
+    router.push(`/assets?address=${address}`);
+  }, [address, router]);
+
   return (
     <div className={cx(styles.search, props.className)}>
       <input
@@ -27,7 +38,7 @@ const Search = (props: Props) => {
 
       <Button
         className={styles.button}
-        onClick={() => router.push(`/assets?address=${address}`)}
+        onClick={handleSearch}
         disabled={!address}
       >
         Show

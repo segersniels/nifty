@@ -1,6 +1,7 @@
 import Button from 'components/Button';
 import Layout from 'components/Layout';
 import Search from 'components/Search';
+import * as gtag from 'lib/gtag';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
 
@@ -14,6 +15,12 @@ const Landing = () => {
       const accounts = await (window as any).ethereum.send(
         'eth_requestAccounts',
       );
+
+      gtag.event({
+        action: 'search_metamask',
+        category: 'address',
+        label: accounts.result[0],
+      });
 
       router.push(`/assets?address=${accounts.result[0]}`);
     } catch (error) {
