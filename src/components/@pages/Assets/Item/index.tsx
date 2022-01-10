@@ -35,7 +35,11 @@ const Item = (props: Props) => {
       target="_blank"
       rel="noreferrer"
     >
-      <img className={styles.image} src={asset.image_url} />
+      {asset.image_url.endsWith('mp4') ? (
+        <video className={styles.image} src={asset.image_url} />
+      ) : (
+        <img className={styles.image} src={asset.image_url} />
+      )}
 
       <div className={styles.top}>
         <p className={styles.price}>Ξ{collection?.stats.floor_price ?? 0}</p>
