@@ -5,6 +5,7 @@ interface Collection {
   payment_tokens: {
     usd_price: number;
   }[];
+  large_image_url: string;
   stats: {
     floor_price: number;
     average_price: number;

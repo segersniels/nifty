@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import Skeleton from 'react-loading-skeleton';
 import Asset from 'types/Asset';
 import Collection from 'types/Collection';
 
@@ -14,7 +13,7 @@ interface Props {
 const Image = ({ asset }: { asset: Asset }) => {
   if (!asset.image_url) {
     return (
-      <Skeleton className={styles.image} height="20rem" borderRadius={0} />
+      <img className={styles.image} src={asset.collection.large_image_url} />
     );
   }
 
