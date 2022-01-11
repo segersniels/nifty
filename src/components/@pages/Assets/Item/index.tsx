@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import Asset from 'types/Asset';
 import Collection from 'types/Collection';
 
@@ -9,6 +10,20 @@ interface Props {
   asset: Asset;
   collection: Collection;
 }
+
+const Image = ({ asset }: { asset: Asset }) => {
+  if (!asset.image_url) {
+    return (
+      <Skeleton className={styles.image} height="20rem" borderRadius={0} />
+    );
+  }
+
+  return asset.image_url.endsWith('mp4') ? (
+    <video className={styles.image} src={asset.image_url} />
+  ) : (
+    <img className={styles.image} src={asset.image_url} />
+  );
+};
 
 const Item = (props: Props) => {
   const { asset, collection } = props;
@@ -35,11 +50,7 @@ const Item = (props: Props) => {
       target="_blank"
       rel="noreferrer"
     >
-      {asset.image_url.endsWith('mp4') ? (
-        <video className={styles.image} src={asset.image_url} />
-      ) : (
-        <img className={styles.image} src={asset.image_url} />
-      )}
+      <Image asset={asset} />
 
       <div className={styles.top}>
         <p className={styles.price}>Ξ{collection?.stats.floor_price ?? 0}</p>
