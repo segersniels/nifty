@@ -12,30 +12,16 @@ import Collection from 'types/Collection';
 import styles from './Assets.module.css';
 
 interface WorthProps {
-  type: 'ETH' | 'USD';
-  worth: number;
-  ethereumWorth: number;
+  value: number;
   onClick: () => void;
 }
 
 const Worth = (props: WorthProps) => {
-  const { type, worth, ethereumWorth, onClick } = props;
-
-  if (type === 'USD') {
-    return (
-      <h1 className={styles.worth} onClick={onClick}>
-        {worth ? `$${worth.toFixed(2)}` : <Skeleton width="15rem" />}
-      </h1>
-    );
-  }
+  const { value, onClick } = props;
 
   return (
     <h1 className={styles.worth} onClick={onClick}>
-      {ethereumWorth ? (
-        `Ξ${ethereumWorth.toFixed(2)}`
-      ) : (
-        <Skeleton width="15rem" />
-      )}
+      {value ? `Ξ${value.toFixed(2)}` : <Skeleton width="15rem" />}
     </h1>
   );
 };
@@ -106,18 +92,19 @@ const Assets = () => {
           );
         }
 
-        const collectionsBySlug = new Map(
-          responses.map((collection) => [collection.slug, collection]),
+        const floorPriceBySlug = new Map(
+          responses.map((collection) => [
+            collection.slug,
+            collection.stats.floor_price,
+          ]),
         );
 
         setEthereumWorth(
-          response.assets
-            .map(
-              (asset) =>
-                collectionsBySlug.get(asset.collection.slug)?.stats
-                  .floor_price ?? 0,
-            )
-            .reduce((sum, current) => sum + current, 0),
+          response.assets.reduce(
+            (total, asset) =>
+              total + floorPriceBySlug.get(asset.collection.slug) ?? 0,
+            0,
+          ),
         );
 
         setWorth(value);
@@ -130,9 +117,7 @@ const Assets = () => {
       <div className={styles.container}>
         <div className={styles.top}>
           <Worth
-            type={showEthereumValue ? 'ETH' : 'USD'}
-            worth={worth}
-            ethereumWorth={ethereumWorth}
+            value={showEthereumValue ? ethereumWorth : worth}
             onClick={() => setShowEthereumValue(!showEthereumValue)}
           />
           <Search className={styles.search} placeholder={address} />
