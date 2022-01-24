@@ -30,7 +30,9 @@
     font-bold
     tracking-tighter
     text-center
-    lg:text-left;
+    lg:text-left
+    cursor-pointer
+    select-none;
 }
 
 .search {
