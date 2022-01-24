@@ -5,7 +5,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const useRequest = <T extends unknown>(
   url: string,
-  options: Partial<PublicConfiguration> & {
+  options: Partial<PublicConfiguration<T>> & {
     shouldFetch?: boolean;
   },
 ) => {
