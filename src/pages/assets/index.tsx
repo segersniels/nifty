@@ -14,14 +14,19 @@ import styles from './Assets.module.css';
 interface WorthProps {
   value: number;
   onClick: () => void;
+  showEthereumValue: boolean;
 }
 
 const Worth = (props: WorthProps) => {
-  const { value, onClick } = props;
+  const { value, onClick, showEthereumValue } = props;
 
   return (
     <h1 className={styles.worth} onClick={onClick}>
-      {value ? `Ξ${value.toFixed(2)}` : <Skeleton width="15rem" />}
+      {value ? (
+        `${showEthereumValue ? 'Ξ' : '$'}${value.toFixed(2)}`
+      ) : (
+        <Skeleton width="15rem" />
+      )}
     </h1>
   );
 };
@@ -119,6 +124,7 @@ const Assets = () => {
           <Worth
             value={showEthereumValue ? ethereumWorth : worth}
             onClick={() => setShowEthereumValue(!showEthereumValue)}
+            showEthereumValue={showEthereumValue}
           />
           <Search className={styles.search} placeholder={address} />
         </div>
