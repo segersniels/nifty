@@ -126,7 +126,7 @@ const Assets = () => {
             onClick={() => setShowEthereumValue(!showEthereumValue)}
             showEthereumValue={showEthereumValue}
           />
-          <Search className={styles.search} placeholder={address} />
+          <Search className={styles.search} />
         </div>
 
         <div className={styles.wrapper}>
