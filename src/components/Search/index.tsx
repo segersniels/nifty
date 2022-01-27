@@ -14,7 +14,7 @@ interface Props {
 
 const Search = (props: Props) => {
   const { placeholder } = props;
-  const [address, setAddress] = useState<string | undefined>(placeholder);
+  const [address, setAddress] = useState<string | undefined>(placeholder ?? '');
   const router = useRouter();
 
   const handleSearch = useCallback(() => {
@@ -34,12 +34,13 @@ const Search = (props: Props) => {
         placeholder="Wallet Address"
         className={styles.input}
         value={address}
+        type="text"
       />
 
       <Button
         className={styles.button}
         onClick={handleSearch}
-        disabled={!address}
+        disabled={address.length === 0}
       >
         Show
       </Button>
