@@ -14,7 +14,7 @@ interface Props {
 
 const Search = (props: Props) => {
   const { placeholder } = props;
-  const [address, setAddress] = useState<string | undefined>(placeholder ?? '');
+  const [address, setAddress] = useState<string | undefined>();
   const router = useRouter();
 
   const handleSearch = useCallback(() => {
@@ -35,7 +35,7 @@ const Search = (props: Props) => {
     <div className={cx(styles.search, props.className)}>
       <input
         onChange={(e) => setAddress(e.target.value)}
-        placeholder="Wallet Address"
+        placeholder={placeholder ?? 'Wallet Address'}
         className={styles.input}
         value={address}
         type="text"
