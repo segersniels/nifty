@@ -22,6 +22,10 @@ const Landing = () => {
         label: accounts.result[0],
       });
 
+      if (!accounts?.result?.length) {
+        return alert('Unable to authenticate with Metamask Wallet');
+      }
+
       router.push(`/assets?address=${accounts.result[0]}`);
     } catch (error) {
       return alert('Unable to authenticate with Metamask Wallet');
