@@ -18,6 +18,10 @@ const Search = (props: Props) => {
   const router = useRouter();
 
   const handleSearch = useCallback(() => {
+    if (!address?.length) {
+      return;
+    }
+
     gtag.event({
       action: 'search_input',
       category: 'address',
