@@ -48,7 +48,7 @@ const Assets = () => {
       onSuccess: async (response) => {
         let value = 0;
 
-        if (!response.assets.length) {
+        if (!response.assets?.length) {
           return;
         }
 
