@@ -1,13 +1,12 @@
+.search {
+  @apply flex
+    w-full;
+}
+
 .input {
   @apply bg-gray-100
     rounded-lg
     text-gray-500
     px-2
-    mr-2
-    flex-1;
-}
-
-.search {
-  @apply flex
-    w-full;
+    mr-2;
 }
