@@ -44,6 +44,7 @@ const Assets = () => {
     `https://api.opensea.io/api/v1/assets?order_direction=asc&limit=50&owner=${address}`,
     {
       refreshInterval: 10000,
+      shouldFetch: !!address?.length,
       onSuccess: async (response) => {
         let value = 0;
 
