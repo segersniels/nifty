@@ -21,8 +21,7 @@
   @apply flex
     flex-col
     m-4
-    lg:flex-row
-    items-end;
+    lg:flex-row;
 }
 
 .worth {
@@ -39,7 +38,8 @@
 .search {
   @apply h-10
     mt-4
-    md:mt-0;
+    md:mt-0
+    md:self-end;
 
   flex: 0;
 }
