@@ -2,12 +2,10 @@
 import Item from 'components/@pages/Assets/Item';
 import Layout from 'components/Layout';
 import Search from 'components/Search';
-import useRequest from 'hooks/useRequest';
+import useOpenSeaData from 'hooks/useAssets';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import Asset from 'types/Asset';
-import Collection from 'types/Collection';
 
 import styles from './Assets.module.css';
 
@@ -33,90 +31,10 @@ const Worth = (props: WorthProps) => {
 
 const Assets = () => {
   const router = useRouter();
-  const [collections, setCollections] = useState<Collection[]>([]);
-  const [worth, setWorth] = useState(0);
-  const [ethereumWorth, setEthereumWorth] = useState(0);
   const [showEthereumValue, setShowEthereumValue] = useState(false);
   const address = (router.query.address ??
     router.asPath.match(new RegExp(`[&?]address=(.*)(&|$)`))?.[1]) as string;
-
-  const { data, error } = useRequest<{ assets: Asset[] }>(
-    `https://api.opensea.io/api/v1/assets?order_direction=asc&limit=50&owner=${address}`,
-    {
-      refreshInterval: 10000,
-      shouldFetch: !!address?.length,
-      onSuccess: async (response) => {
-        let value = 0;
-
-        if (!response.assets?.length) {
-          return;
-        }
-
-        const slugs = Array.from(
-          new Set(response.assets.map((asset) => asset.collection.slug)),
-        );
-
-        const amountBySlug = response.assets.reduce((total, asset) => {
-          const slug = asset.collection.slug;
-
-          // Already have the slug so increment
-          if (total[slug]) {
-            return {
-              ...total,
-              [slug]: total[slug] + 1,
-            };
-          }
-
-          return {
-            ...total,
-            [slug]: 1,
-          };
-        }, {} as Record<string, number>);
-
-        const responses = await Promise.all(
-          slugs.map(async (slug) => {
-            const response = await fetch(
-              `https://api.opensea.io/api/v1/collection/${slug}`,
-            );
-            const { collection }: { collection: Collection } =
-              await response.json();
-
-            return collection;
-          }),
-        );
-
-        setCollections(responses.flat());
-
-        for (const collection of responses) {
-          value +=
-            amountBySlug[collection.slug] *
-            collection.payment_tokens[0].usd_price *
-            collection.stats.floor_price;
-
-          setEthereumWorth(
-            (previous) => previous + collection.stats.floor_price,
-          );
-        }
-
-        const floorPriceBySlug = new Map(
-          responses.map((collection) => [
-            collection.slug,
-            collection.stats.floor_price,
-          ]),
-        );
-
-        setEthereumWorth(
-          response.assets.reduce(
-            (total, asset) =>
-              total + floorPriceBySlug.get(asset.collection.slug) ?? 0,
-            0,
-          ),
-        );
-
-        setWorth(value);
-      },
-    },
-  );
+  const { assets, worth, ethereumWorth } = useOpenSeaData(address);
 
   return (
     <Layout>
@@ -131,16 +49,20 @@ const Assets = () => {
         </div>
 
         <div className={styles.wrapper}>
-          {data?.assets?.length && !error
-            ? data.assets.map((asset) => (
-                <Item
-                  key={asset.id}
-                  asset={asset}
-                  collection={collections.find(
-                    (c) => c.slug === asset.collection.slug,
-                  )}
-                />
-              ))
+          {assets?.length
+            ? assets
+                .sort(
+                  (a, b) =>
+                    b.collection.stats.floor_price -
+                    a.collection.stats.floor_price,
+                )
+                .map((asset) => (
+                  <Item
+                    key={asset.id}
+                    asset={asset}
+                    collection={asset.collection}
+                  />
+                ))
             : Array.from({ length: 3 }, (_, i) => i + 1).map((index) => (
                 <Item.Loading key={index} />
               ))}
