@@ -5,7 +5,6 @@ import Asset from 'types/Asset';
 import Collection from 'types/Collection';
 
 const useOpenSeaData = (address: string) => {
-  const [collections, setCollections] = useState<Collection[]>([]);
   const [assets, setAssets] = useState<Asset[]>([]);
   const [worth, setWorth] = useState(0);
   const [ethereumWorth, setEthereumWorth] = useState(0);
@@ -28,15 +27,6 @@ const useOpenSeaData = (address: string) => {
         ...(await fetchCollections(slugsToFetch)),
       ];
 
-      // Add data as we go per batch
-      setCollections(
-        Array.from(
-          new Map(
-            data.collections.map((collection) => [collection.slug, collection]),
-          ).values(),
-        ),
-      );
-
       for (const asset of batch) {
         const collection = data.collections.find(
           (c) => c.slug === asset.collection.slug,
@@ -58,36 +48,29 @@ const useOpenSeaData = (address: string) => {
       );
     }
 
-    setCollections(
-      Array.from(
-        new Map(
-          data.collections.map((collection) => [collection.slug, collection]),
-        ).values(),
-      ),
-    );
-  }, [address]);
-
-  useEffect(() => {
+    // Calculate worth after batches have been processed
     let value = 0;
+    const amountBySlug = Array.from(data.assets.values()).reduce(
+      (total, asset) => {
+        const slug = asset.collection.slug;
 
-    const amountBySlug = Array.from(assets.values()).reduce((total, asset) => {
-      const slug = asset.collection.slug;
+        // Already have the slug so increment
+        if (total[slug]) {
+          return {
+            ...total,
+            [slug]: total[slug] + 1,
+          };
+        }
 
-      // Already have the slug so increment
-      if (total[slug]) {
         return {
           ...total,
-          [slug]: total[slug] + 1,
+          [slug]: 1,
         };
-      }
+      },
+      {} as Record<string, number>,
+    );
 
-      return {
-        ...total,
-        [slug]: 1,
-      };
-    }, {} as Record<string, number>);
-
-    for (const collection of Array.from(collections.values())) {
+    for (const collection of Array.from(data.collections.values())) {
       value +=
         amountBySlug[collection.slug] *
         collection.payment_tokens[0].usd_price *
@@ -95,14 +78,14 @@ const useOpenSeaData = (address: string) => {
     }
 
     const floorPriceBySlug = new Map(
-      Array.from(collections.values()).map((collection) => [
+      Array.from(data.collections.values()).map((collection) => [
         collection.slug,
         collection.stats.floor_price,
       ]),
     );
 
     setEthereumWorth(
-      Array.from(assets.values()).reduce(
+      Array.from(data.assets.values()).reduce(
         (total, asset) =>
           total + floorPriceBySlug.get(asset.collection.slug) ?? 0,
         0,
@@ -110,7 +93,7 @@ const useOpenSeaData = (address: string) => {
     );
 
     setWorth(value);
-  }, [assets, collections]);
+  }, [address]);
 
   useIntervalWhen(
     () => {
@@ -126,6 +109,11 @@ const useOpenSeaData = (address: string) => {
       return;
     }
 
+    // Reset worth while fetching new data
+    setWorth(0);
+    setEthereumWorth(0);
+
+    // Fetch initial data on address change
     fetch();
   }, [previousAddress, address, fetch]);
 
