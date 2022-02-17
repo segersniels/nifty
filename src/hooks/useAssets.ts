@@ -1,5 +1,6 @@
 import { fetchAssets, fetchCollections } from 'lib/api';
 import { useCallback, useEffect, useState } from 'react';
+import { useIntervalWhen } from 'rooks';
 import Asset from 'types/Asset';
 import Collection from 'types/Collection';
 
@@ -110,9 +111,14 @@ const useOpenSeaData = (address: string) => {
     setWorth(value);
   }, [assets, collections]);
 
-  useEffect(() => {
-    fetch();
-  }, [fetch]);
+  useIntervalWhen(
+    () => {
+      fetch();
+    },
+    10000,
+    true,
+    true,
+  );
 
   return {
     assets,
