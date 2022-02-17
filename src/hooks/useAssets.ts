@@ -1,6 +1,6 @@
 import { fetchAssets, fetchCollections } from 'lib/api';
 import { useCallback, useEffect, useState } from 'react';
-import { useIntervalWhen } from 'rooks';
+import { useIntervalWhen, usePreviousImmediate } from 'rooks';
 import Asset from 'types/Asset';
 import Collection from 'types/Collection';
 
@@ -9,6 +9,7 @@ const useOpenSeaData = (address: string) => {
   const [assets, setAssets] = useState<Asset[]>([]);
   const [worth, setWorth] = useState(0);
   const [ethereumWorth, setEthereumWorth] = useState(0);
+  const previousAddress = usePreviousImmediate(address);
 
   const fetch = useCallback(async () => {
     const data: { assets: Asset[]; collections: Collection[] } = {
@@ -119,6 +120,14 @@ const useOpenSeaData = (address: string) => {
     true,
     true,
   );
+
+  useEffect(() => {
+    if (previousAddress === address) {
+      return;
+    }
+
+    fetch();
+  }, [previousAddress, address, fetch]);
 
   return {
     assets,
