@@ -122,7 +122,7 @@ const useOpenSeaData = (address: string) => {
   );
 
   useEffect(() => {
-    if (previousAddress === address) {
+    if (!previousAddress || previousAddress === address) {
       return;
     }
 
