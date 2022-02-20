@@ -4,6 +4,7 @@ interface Collection {
   slug: string;
   payment_tokens: {
     usd_price: number;
+    symbol: string;
   }[];
   large_image_url: string;
   stats: {

@@ -7,36 +7,10 @@ import Collection from 'types/Collection';
 const useOpenSeaData = (address: string) => {
   const [assets, setAssets] = useState<Asset[]>([]);
   const [worth, setWorth] = useState(0);
-  const [ethereumWorth, setEthereumWorth] = useState(0);
   const previousAddress = usePreviousImmediate(address);
 
   const calculateWorth = useCallback(
     (assets: Asset[], collections: Collection[]) => {
-      let value = 0;
-      const amountBySlug = assets.reduce((total, asset) => {
-        const slug = asset.collection.slug;
-
-        // Already have the slug so increment
-        if (total[slug]) {
-          return {
-            ...total,
-            [slug]: total[slug] + 1,
-          };
-        }
-
-        return {
-          ...total,
-          [slug]: 1,
-        };
-      }, {} as Record<string, number>);
-
-      for (const collection of collections) {
-        value +=
-          amountBySlug[collection.slug] *
-          collection.payment_tokens[0].usd_price *
-          collection.stats.floor_price;
-      }
-
       const floorPriceBySlug = new Map(
         collections.map((collection) => [
           collection.slug,
@@ -44,15 +18,13 @@ const useOpenSeaData = (address: string) => {
         ]),
       );
 
-      setEthereumWorth(
+      setWorth(
         assets.reduce(
           (total, asset) =>
             total + floorPriceBySlug.get(asset.collection.slug) ?? 0,
           0,
         ),
       );
-
-      setWorth(value);
     },
     [],
   );
@@ -129,7 +101,6 @@ const useOpenSeaData = (address: string) => {
 
     // Reset worth while fetching new data
     setWorth(0);
-    setEthereumWorth(0);
 
     // Fetch initial data on address change
     fetch(true);
@@ -138,7 +109,6 @@ const useOpenSeaData = (address: string) => {
   return {
     assets,
     worth,
-    ethereumWorth,
   };
 };
 

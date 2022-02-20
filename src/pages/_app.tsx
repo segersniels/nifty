@@ -2,6 +2,7 @@ import 'styles/global.css';
 import 'styles/core.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+import { ValueContextProvider } from 'context/ValueContext';
 import * as gtag from 'lib/gtag';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -44,7 +45,9 @@ const App = ({ Component, pageProps }) => {
         }}
       />
 
-      <Component {...pageProps} />
+      <ValueContextProvider>
+        <Component {...pageProps} />
+      </ValueContextProvider>
     </>
   );
 };

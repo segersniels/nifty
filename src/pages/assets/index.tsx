@@ -2,9 +2,10 @@
 import Item from 'components/@pages/Assets/Item';
 import Layout from 'components/Layout';
 import Search from 'components/Search';
+import { Currency, useValueContext } from 'context/ValueContext';
 import useOpenSeaData from 'hooks/useAssets';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import styles from './Assets.module.css';
@@ -12,16 +13,16 @@ import styles from './Assets.module.css';
 interface WorthProps {
   value: number;
   onClick: () => void;
-  showEthereumValue: boolean;
+  currency: Currency;
 }
 
 const Worth = (props: WorthProps) => {
-  const { value, onClick, showEthereumValue } = props;
+  const { value, onClick, currency } = props;
 
   return (
     <h1 className={styles.worth} onClick={onClick}>
       {value ? (
-        `${showEthereumValue ? 'Ξ' : '$'}${value.toFixed(2)}`
+        `${currency === Currency.Ethereum ? 'Ξ' : '$'}${value.toFixed(2)}`
       ) : (
         <Skeleton width="15rem" />
       )}
@@ -31,19 +32,19 @@ const Worth = (props: WorthProps) => {
 
 const Assets = () => {
   const router = useRouter();
-  const [showEthereumValue, setShowEthereumValue] = useState(false);
   const address = (router.query.address ??
     router.asPath.match(new RegExp(`[&?]address=(.*)(&|$)`))?.[1]) as string;
-  const { assets, worth, ethereumWorth } = useOpenSeaData(address);
+  const { assets, worth } = useOpenSeaData(address);
+  const { currency, determineWorth, switchCurrency } = useValueContext();
 
   return (
     <Layout>
       <div className={styles.container}>
         <div className={styles.top}>
           <Worth
-            value={showEthereumValue ? ethereumWorth : worth}
-            onClick={() => setShowEthereumValue(!showEthereumValue)}
-            showEthereumValue={showEthereumValue}
+            value={determineWorth(worth)}
+            onClick={() => switchCurrency()}
+            currency={currency}
           />
           <Search className={styles.search} />
         </div>
