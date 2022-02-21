@@ -9,6 +9,7 @@
 
 .image {
   @apply w-full
+    max-h-80
     rounded-t-2xl
     leading-loose;
 }
