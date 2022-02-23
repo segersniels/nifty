@@ -28,6 +28,9 @@ export const fetchCollections = async (slugs: string[]) => {
     slugs.map(async (slug) => {
       const response = await fetch(
         `https://api.opensea.io/api/v1/collection/${slug}`,
+        {
+          cache: 'no-cache',
+        },
       );
       const { collection }: { collection: Collection } = await response.json();
 
