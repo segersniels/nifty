@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
   if (owner.endsWith('.eth')) {
     const provider = new ethers.providers.CloudflareProvider();
-    owner = await provider.resolveName(owner);
+    owner = await provider.resolveName(owner.toLowerCase());
   }
 
   const response = await fetch(
