@@ -13,15 +13,22 @@
 
 .footer {
   @apply flex
-    flex-none
-    flex-col
-    items-center
+    flex-1
+    self-center
+    justify-between
     font-light
     text-gray-300
     text-xs
+    px-2
     py-1
+    md:w-full
     md:text-sm
     md:fixed
-    md:bottom-1
-    md:right-2;
+    md:bottom-0
+    md:right-0;
+}
+
+.price {
+  @apply hidden
+    md:flex;
 }
