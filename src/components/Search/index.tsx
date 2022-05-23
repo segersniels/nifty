@@ -42,7 +42,7 @@ const Search = (props: Props) => {
       onSubmit={handleSearch}
     >
       <input
-        onChange={(e) => setAddress(e.target.value)}
+        onChange={(e) => setAddress(e.target.value.trim())}
         placeholder={placeholder ?? 'Wallet Address'}
         className={styles.input}
         value={address}
