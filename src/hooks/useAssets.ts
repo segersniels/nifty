@@ -42,6 +42,7 @@ const useOpenSeaData = (address: string) => {
         const slugsToFetch = Array.from(
           new Set(batch.map((asset) => asset.collection.slug)),
         );
+
         data.collections = [
           ...data.collections,
           ...(await fetchCollections(slugsToFetch)),
@@ -61,7 +62,7 @@ const useOpenSeaData = (address: string) => {
         }
 
         // Add data as we go per batch on initial fetch
-        if (isInitialFetch) {
+        if (isInitialFetch && data.assets.length) {
           setAssets(
             Array.from(
               new Map(data.assets.map((asset) => [asset.id, asset])).values(),
@@ -71,7 +72,7 @@ const useOpenSeaData = (address: string) => {
       }
 
       // When refreshing update data in one single chunk (data is already visible from previous fetch)
-      if (!isInitialFetch) {
+      if (!isInitialFetch && data.assets.length) {
         setAssets(
           Array.from(
             new Map(data.assets.map((asset) => [asset.id, asset])).values(),
