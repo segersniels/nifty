@@ -7,11 +7,15 @@
     overflow-hidden;
 }
 
-.image {
-  @apply w-full
-    max-h-80
+.wrapper {
+  @apply max-h-80
+    w-80
     rounded-t-2xl
-    leading-loose;
+    overflow-hidden;
+}
+
+.image {
+  @apply w-full;
 }
 
 .table {
