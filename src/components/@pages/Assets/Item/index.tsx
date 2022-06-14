@@ -10,6 +10,10 @@ interface Props {
   collection: Collection;
 }
 
+const formatEthereumValue = (value: number) => {
+  return `Ξ${value.toFixed(3)}`;
+};
+
 const Image = ({ asset }: { asset: Asset }) => {
   if (!asset.image_url) {
     return (
@@ -69,8 +73,9 @@ const Item = (props: Props) => {
             <tr className={styles.row}>
               <td className={styles.description}>Purchase Price</td>
               <td className={styles.value}>
-                Ξ
-                {(asset.last_sale.total_price / 1000000000000000000).toFixed(3)}
+                {formatEthereumValue(
+                  asset.last_sale.total_price / 1000000000000000000,
+                )}
               </td>
             </tr>
           )}
@@ -78,7 +83,7 @@ const Item = (props: Props) => {
           <tr className={styles.row}>
             <td className={styles.description}>Average Price</td>
             <td className={styles.value}>
-              Ξ{collection.stats.average_price.toFixed(3) ?? 0}
+              {formatEthereumValue(collection.stats.average_price ?? 0)}
             </td>
           </tr>
 
@@ -86,7 +91,7 @@ const Item = (props: Props) => {
             <tr className={styles.row}>
               <td className={styles.description}>1d Average Price</td>
               <td className={styles.value}>
-                Ξ{collection.stats.one_day_average_price.toFixed(3)}
+                {formatEthereumValue(collection.stats.one_day_average_price)}
               </td>
             </tr>
           )}
@@ -95,7 +100,7 @@ const Item = (props: Props) => {
             <tr className={styles.row}>
               <td className={styles.description}>7d Average Price</td>
               <td className={styles.value}>
-                Ξ{collection.stats.seven_day_average_price.toFixed(3)}
+                {formatEthereumValue(collection.stats.seven_day_average_price)}
               </td>
             </tr>
           )}
@@ -104,7 +109,7 @@ const Item = (props: Props) => {
             <tr className={styles.row}>
               <td className={styles.description}>1d Volume</td>
               <td className={styles.value}>
-                {collection.stats.one_day_volume.toFixed(3)}
+                {formatEthereumValue(collection.stats.one_day_volume)}
               </td>
             </tr>
           )}
