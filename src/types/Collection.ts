@@ -13,6 +13,7 @@ interface Collection {
     one_day_average_price: number;
     one_day_sales: number;
     seven_day_average_price: number;
+    one_day_volume: number;
   };
 }
 

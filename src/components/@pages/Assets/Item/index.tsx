@@ -100,6 +100,15 @@ const Item = (props: Props) => {
             </tr>
           )}
 
+          {!!collection.stats.one_day_volume && (
+            <tr className={styles.row}>
+              <td className={styles.description}>1d Volume</td>
+              <td className={styles.value}>
+                {collection.stats.one_day_volume}
+              </td>
+            </tr>
+          )}
+
           {!!collection.stats.one_day_sales && (
             <tr className={styles.row}>
               <td className={styles.description}>Sales (24h)</td>
