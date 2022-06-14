@@ -104,7 +104,7 @@ const Item = (props: Props) => {
             <tr className={styles.row}>
               <td className={styles.description}>1d Volume</td>
               <td className={styles.value}>
-                {collection.stats.one_day_volume}
+                {collection.stats.one_day_volume.toFixed(3)}
               </td>
             </tr>
           )}
