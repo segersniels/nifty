@@ -16,7 +16,6 @@ const Layout = (props: Props) => {
 
       <div className={styles.footer}>
         <p className={styles.price}>{`$${price}`}</p>
-        <p>0x73Da490563C0ccBFd1b86763ccB11B4DaBbCB550</p>
       </div>
     </div>
   );
