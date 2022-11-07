@@ -1,4 +1,4 @@
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import React, { useCallback } from 'react';
 import Asset from 'types/Asset';
 import Collection from 'types/Collection';
@@ -22,6 +22,8 @@ const Image = ({ asset }: { asset: Asset }) => {
         <NextImage
           className={styles.image}
           src={asset.collection.large_image_url}
+          layout="fill"
+          alt=""
         />
       </div>
     );
@@ -32,7 +34,12 @@ const Image = ({ asset }: { asset: Asset }) => {
       {asset.image_url.endsWith('mp4') ? (
         <video className={styles.image} src={asset.image_url} />
       ) : (
-        <NextImage className={styles.image} src={asset.image_url} />
+        <NextImage
+          className={styles.image}
+          src={asset.image_url}
+          layout="fill"
+          alt=""
+        />
       )}
     </div>
   );
