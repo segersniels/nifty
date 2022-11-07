@@ -21,7 +21,7 @@ const Image = ({ asset }: { asset: Asset }) => {
       <div className={styles.wrapper}>
         <NextImage
           className={styles.image}
-          src={asset.collection.large_image_url}
+          src={asset.collection.large_image_url ?? asset.collection.image_url}
           layout="fill"
           alt=""
         />

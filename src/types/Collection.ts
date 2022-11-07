@@ -6,6 +6,7 @@ interface Collection {
     usd_price: number;
     symbol: string;
   }[];
+  image_url: string;
   large_image_url: string;
   stats: {
     floor_price: number;
