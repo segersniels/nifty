@@ -53,7 +53,12 @@ const useOpenSeaData = (address: string) => {
             (c) => c.slug === asset.collection.slug,
           );
 
-          if (!collection || !collection.stats.total_sales) {
+          // Exclude invalid collections or dead collections
+          if (
+            !collection ||
+            !collection.stats.total_sales ||
+            !collection.stats.thirty_day_volume
+          ) {
             continue;
           }
 
