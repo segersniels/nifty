@@ -53,7 +53,7 @@ const useOpenSeaData = (address: string) => {
             (c) => c.slug === asset.collection.slug,
           );
 
-          if (!collection) {
+          if (!collection || !collection.stats.total_sales) {
             continue;
           }
 
