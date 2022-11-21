@@ -1,5 +1,6 @@
 import NextImage from 'next/image';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import Asset from 'types/Asset';
 import Collection from 'types/Collection';
 
@@ -16,6 +17,16 @@ const formatEthereumValue = (value: number) => {
 };
 
 const Image = ({ asset }: { asset: Asset }) => {
+  const [hasFailed, setHasFailed] = useState(false);
+
+  if (hasFailed) {
+    return (
+      <div className={styles.wrapper}>
+        <Skeleton className={styles.image} height="20rem" borderRadius={0} />
+      </div>
+    );
+  }
+
   if (!asset.image_url) {
     return (
       <div className={styles.wrapper}>
@@ -24,6 +35,7 @@ const Image = ({ asset }: { asset: Asset }) => {
           src={asset.collection.large_image_url ?? asset.collection.image_url}
           fill
           alt=""
+          onError={() => setHasFailed(true)}
         />
       </div>
     );
@@ -32,9 +44,19 @@ const Image = ({ asset }: { asset: Asset }) => {
   return (
     <div className={styles.wrapper}>
       {asset.image_url.endsWith('mp4') ? (
-        <video className={styles.image} src={asset.image_url} />
+        <video
+          className={styles.image}
+          src={asset.image_url}
+          onError={() => setHasFailed(true)}
+        />
       ) : (
-        <NextImage className={styles.image} src={asset.image_url} fill alt="" />
+        <NextImage
+          className={styles.image}
+          src={asset.image_url}
+          fill
+          alt=""
+          onError={() => setHasFailed(true)}
+        />
       )}
     </div>
   );
