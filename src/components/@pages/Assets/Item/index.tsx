@@ -22,7 +22,7 @@ const Image = ({ asset }: { asset: Asset }) => {
         <NextImage
           className={styles.image}
           src={asset.collection.large_image_url ?? asset.collection.image_url}
-          layout="fill"
+          fill
           alt=""
         />
       </div>
@@ -34,12 +34,7 @@ const Image = ({ asset }: { asset: Asset }) => {
       {asset.image_url.endsWith('mp4') ? (
         <video className={styles.image} src={asset.image_url} />
       ) : (
-        <NextImage
-          className={styles.image}
-          src={asset.image_url}
-          layout="fill"
-          alt=""
-        />
+        <NextImage className={styles.image} src={asset.image_url} fill alt="" />
       )}
     </div>
   );
