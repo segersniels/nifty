@@ -16,7 +16,8 @@
 
 .image {
   @apply !relative
-    object-fill;
+    object-fill
+    leading-normal;
 }
 
 .table {
