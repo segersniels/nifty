@@ -19,9 +19,7 @@ interface Props {
 export const ValueContextProvider = (props: Props) => {
   const { children } = props;
   const price = useEthereumPrice();
-  const [currency, setCurrency] = useState<Currency>(
-    Currency.UnitedStatesDollar,
-  );
+  const [currency, setCurrency] = useState<Currency>(Currency.Ethereum);
 
   const determineWorth = useCallback(
     (worth: number) => {
