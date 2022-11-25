@@ -105,10 +105,8 @@ const useOpenSeaData = (address: string) => {
       return;
     }
 
-    // Reset worth while fetching new data
+    setAssets([]);
     setWorth(0);
-
-    // Fetch initial data on address change
     fetch(true);
   }, [previousAddress, address, fetch]);
 
