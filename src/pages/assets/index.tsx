@@ -2,7 +2,8 @@
 import Item from 'components/@pages/Assets/Item';
 import Layout from 'components/Layout';
 import Search from 'components/Search';
-import { Currency, useValueContext } from 'context/ValueContext';
+import { useValueContext } from 'context/ValueContext';
+import Currency from 'enums/Currency';
 import useOpenSeaData from 'hooks/useAssets';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -62,6 +63,7 @@ const Assets = () => {
                     key={asset.id}
                     asset={asset}
                     collection={asset.collection}
+                    currency={currency}
                   />
                 ))
             : Array.from({ length: 3 }, (_, i) => i + 1).map((index) => (

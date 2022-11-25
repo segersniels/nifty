@@ -1,3 +1,5 @@
+import Currency from 'enums/Currency';
+import useEthereumPrice from 'hooks/useEthereumPrice';
 import NextImage from 'next/image';
 import React, { useCallback, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -10,6 +12,7 @@ import Loading from './Loading';
 interface Props {
   asset: Asset;
   collection: Collection;
+  currency: Currency;
 }
 
 const formatEthereumValue = (value: number) => {
@@ -63,7 +66,8 @@ const Image = ({ asset }: { asset: Asset }) => {
 };
 
 const Item = (props: Props) => {
-  const { asset, collection } = props;
+  const { asset, collection, currency } = props;
+  const price = useEthereumPrice();
 
   const constructName = useCallback(() => {
     let name = asset.name;
@@ -80,6 +84,10 @@ const Item = (props: Props) => {
     return <Loading />;
   }
 
+  const floorPrice = collection?.stats.floor_price ?? 0;
+  const displayPrice =
+    currency === Currency.Ethereum ? floorPrice : floorPrice * price;
+
   return (
     <a
       href={asset.permalink}
@@ -90,7 +98,11 @@ const Item = (props: Props) => {
       <Image asset={asset} />
 
       <div className={styles.top}>
-        <p className={styles.price}>Ξ{collection?.stats.floor_price ?? 0}</p>
+        <p className={styles.price}>
+          {`${currency === Currency.Ethereum ? 'Ξ' : '$'}${displayPrice.toFixed(
+            2,
+          )}`}
+        </p>
 
         <p className={styles.name}>{constructName()}</p>
       </div>

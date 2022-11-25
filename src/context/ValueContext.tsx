@@ -1,11 +1,6 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import useRequest from 'hooks/useRequest';
+import Currency from 'enums/Currency';
+import useEthereumPrice from 'hooks/useEthereumPrice';
 import React, { useCallback, useContext, useState } from 'react';
-
-export enum Currency {
-  Ethereum = 'ETH',
-  UnitedStatesDollar = 'USD',
-}
 
 interface ContextType {
   price: number;
@@ -23,19 +18,9 @@ interface Props {
 
 export const ValueContextProvider = (props: Props) => {
   const { children } = props;
-  const [price, setPrice] = useState(0);
+  const price = useEthereumPrice();
   const [currency, setCurrency] = useState<Currency>(
     Currency.UnitedStatesDollar,
-  );
-
-  useRequest<{ current_price: number }[]>(
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum',
-    {
-      refreshInterval: 5000,
-      onSuccess: (data) => {
-        setPrice(data[0].current_price);
-      },
-    },
   );
 
   const determineWorth = useCallback(
