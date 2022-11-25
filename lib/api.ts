@@ -24,19 +24,24 @@ export async function* fetchAssets(address: string) {
 }
 
 export const fetchCollections = async (slugs: string[]) => {
-  const responses = await Promise.all(
-    slugs.map(async (slug) => {
-      const response = await fetch(
-        `https://api.opensea.io/api/v1/collection/${slug}`,
-        {
-          cache: 'no-cache',
-        },
-      );
-      const { collection }: { collection: Collection } = await response.json();
+  try {
+    const responses = await Promise.all(
+      slugs.map(async (slug) => {
+        const response = await fetch(
+          `https://api.opensea.io/api/v1/collection/${slug}`,
+          {
+            cache: 'no-cache',
+          },
+        );
+        const { collection }: { collection: Collection } =
+          await response.json();
 
-      return collection;
-    }),
-  );
+        return collection;
+      }),
+    );
 
-  return responses.flat();
+    return responses.flat();
+  } catch (err) {
+    return [];
+  }
 };
