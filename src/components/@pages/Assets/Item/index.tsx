@@ -99,7 +99,7 @@ const Item = (props: Props) => {
 
       <div className={styles.top}>
         <p className={styles.price}>
-          {`${currency === Currency.Ethereum ? 'Ξ' : '$'}${displayPrice}`}
+          {currency === Currency.Ethereum ? `Ξ${displayPrice}` : `$${displayPrice.toFixed(2)`}
         </p>
 
         <p className={styles.name}>{constructName()}</p>
