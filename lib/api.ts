@@ -23,24 +23,27 @@ export async function* fetchAssets(address: string) {
   } while (previousLength === limit);
 }
 
+function sleep(timeInMs: number) {
+  return new Promise((resolve) => setTimeout(resolve, timeInMs));
+}
+
 export const fetchCollections = async (slugs: string[]) => {
+  const collections: Collection[] = [];
+
   try {
-    const responses = await Promise.all(
-      slugs.map(async (slug) => {
-        const response = await fetch(
-          `https://api.opensea.io/api/v1/collection/${slug}`,
-          {
-            cache: 'no-cache',
-          },
-        );
-        const { collection }: { collection: Collection } =
-          await response.json();
+    for (const slug of slugs) {
+      const response = await fetch(`/api/collections?slug=${slug}`);
+      const data: { collection: Collection } = await response.json();
 
-        return collection;
-      }),
-    );
+      if (!data.collection) {
+        continue;
+      }
 
-    return responses.flat();
+      collections.push(data.collection);
+      await sleep(500);
+    }
+
+    return collections;
   } catch (err) {
     return [];
   }
