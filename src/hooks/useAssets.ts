@@ -95,7 +95,7 @@ const useOpenSeaData = (address: string) => {
     () => {
       fetch();
     },
-    10000,
+    60000,
     true,
     false,
   );
